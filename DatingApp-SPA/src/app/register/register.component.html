@@ -15,4 +15,9 @@
       <button class="btn btn-default" type="button" (click)="cancel()">Cancel</button>
 
     </div>
+
+    <p *ngFor="let v of valueFromHome">
+        {{v.name}}
+        </p>
 </form>
+

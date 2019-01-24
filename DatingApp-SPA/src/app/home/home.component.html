@@ -10,8 +10,12 @@
   <div *ngIf="registerMode" class="container">
     <div class="row justify-content-center">
       <div class="col-4">
-        <app-register></app-register>
-      </div>
+        <app-register [valueFromHome]="values"></app-register>
+      </div> 
     </div>
   </div>
 </div>
+
+<p *ngFor="let v of values">
+{{v.name}}
+</p>
