@@ -10,14 +10,16 @@
   <div *ngIf="registerMode" class="container">
     <div class="row justify-content-center">
       <div class="col-4">
-        <app-register [valueFromHome]="values" (cancelRegister)="cancelRegisterMode($event)"></app-register>
+        <!-- value from home is input properties to comunicate with child component-->
+        <!-- <app-register [valueFromHome]="values" (cancelRegister)="cancelRegisterMode($event)"></app-register> -->
         <!-- cancelRegister using () that means get the Output properties value from the child component, 
           and than send the value ad param to the parent component methos -->
+          <app-register (cancelRegister)="cancelRegisterMode($event)"></app-register>
       </div> 
     </div>
   </div>
 </div>
 
-<p *ngFor="let v of values">
+<!-- <p *ngFor="let v of values">
 {{v.name}}
-</p>
+</p> -->
