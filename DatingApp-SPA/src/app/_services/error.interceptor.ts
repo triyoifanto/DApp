@@ -5,7 +5,7 @@ import { catchError } from 'rxjs/operators';
 
 @Injectable()
 // get error message from response header
-export class ErrorInterceptor implements HttpInterceptor{
+export class ErrorInterceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         return next.handle(req).pipe(
             catchError(error => {
