@@ -15,7 +15,7 @@
 
     </ul>
     <div *ngIf="loggedIn()" class="dropdown" dropdown>
-      <a href="#" class="dropdown-toggle text-light" dropdownToggle>
+      <a class="dropdown-toggle text-light" dropdownToggle>
         Welcome {{authService.decodedToken?.unique_name | titlecase}}</a>
       <!-- ? means that enable the unique_name have a null value, and | is to format the value as titlecase(capital on first char)-->
       <div class="dropdown-menu mt-3" *dropdownMenu>
