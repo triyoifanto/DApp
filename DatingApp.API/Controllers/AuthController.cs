@@ -59,15 +59,16 @@ namespace DatingApp.API.Controllers
         [HttpPost("logintoken")]
         public async Task<IActionResult> LoginToken(UserLoginDto user)
         {
+            throw new Exception("test exception");
             var userData = await _repo.Login(user.UserName, user.Password);
             if (userData == null)
                 return Unauthorized();
 
             // variable to store claims so to get user info no need to get from DB again. claim will be fill in token
             var claims = new[]{
-                new Claim(ClaimTypes.NameIdentifier, userData.Id.ToString()),
-                new Claim(ClaimTypes.Name, userData.UserName)
-            };
+                    new Claim(ClaimTypes.NameIdentifier, userData.Id.ToString()),
+                    new Claim(ClaimTypes.Name, userData.UserName)
+                };
 
             // encode key to sign the token, signing key is to make sure the token on the next request from client is valid token
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetSection("AppSettings:Token").Value));
@@ -88,7 +89,8 @@ namespace DatingApp.API.Controllers
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
             // before returned to client serialized token
-            return Ok(new{
+            return Ok(new
+            {
                 token = tokenHandler.WriteToken(token)
             });
 
