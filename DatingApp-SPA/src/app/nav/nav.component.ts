@@ -16,12 +16,13 @@ export class NavComponent implements OnInit {
 
   login() {
     this.authService.login(this.model)
-    .subscribe(next => {
-      console.log('login suceesfully');
-    }, error => {
-      console.log('error logged in');
-    }
-    );
+      .subscribe(next => {
+        console.log('login suceesfully');
+      }, error => {
+        // the error message already hanled by custom service errorinterceptor
+        console.log(error);
+      }
+      );
   }
 
   loggedIn() {
@@ -33,5 +34,4 @@ export class NavComponent implements OnInit {
     localStorage.removeItem('token');
     console.log('logged out');
   }
-
 }

@@ -59,7 +59,6 @@ namespace DatingApp.API.Controllers
         [HttpPost("logintoken")]
         public async Task<IActionResult> LoginToken(UserLoginDto user)
         {
-            throw new Exception("test exception");
             var userData = await _repo.Login(user.UserName, user.Password);
             if (userData == null)
                 return Unauthorized();

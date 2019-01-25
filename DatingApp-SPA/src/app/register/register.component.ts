@@ -9,7 +9,7 @@ import { AuthService } from '../_services/auth.service';
 export class RegisterComponent implements OnInit {
   // the input properties thant sneded from parent component
   // @Input() valueFromHome: any;
-  
+
   // the output properties that emit an event
   @Output() cancelRegister = new EventEmitter();
   model: any = {};
@@ -23,7 +23,7 @@ export class RegisterComponent implements OnInit {
       .subscribe(() => {
         console.log('register success');
       }, error => {
-        console.log('error');
+        console.log(error);
       });
     console.log(this.model);
   }
@@ -32,5 +32,4 @@ export class RegisterComponent implements OnInit {
     this.cancelRegister.emit(false);
     console.log('cancelled');
   }
-
 }
