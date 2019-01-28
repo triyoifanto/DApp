@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using DatingApp.API.Data;
 using DatingApp.API.Helpers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -36,12 +37,21 @@ namespace DatingApp.API
         {
             services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+            .AddJsonOptions(opt => {
+                // 
+                opt.SerializerSettings.ReferenceLoopHandling = 
+                Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
 
             // add cors enable
-            services.AddCors();          
+            services.AddCors();      
+
+            // automapper service
+            services.AddAutoMapper();    
 
             services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddScoped<IDatingRepository, DatingRepository>();
 
             // add seed data
             services.AddTransient<Seed>();
@@ -61,7 +71,7 @@ namespace DatingApp.API
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, Seed seeder, IAuthRepository auth)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, Seed seeder, IDatingRepository userRepo)
         {
             if (env.IsDevelopment())
             {
@@ -89,7 +99,7 @@ namespace DatingApp.API
             // app.UseHttpsRedirection();
 
             // seed user, uncomment for the first run
-            if(auth.CountUser().Result == 0) {
+            if(userRepo.CountUser().Result == 0) {
                 seeder.SeedUsers();
             }
             

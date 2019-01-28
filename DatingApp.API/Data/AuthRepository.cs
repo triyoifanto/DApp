@@ -75,15 +75,5 @@ namespace DatingApp.API.Data
 
             return false;
         }
-
-        public async Task<List<User>> GetUser()
-        {
-            return await _ctx.Users.ToListAsync();
-        }
-
-        public async Task<int> CountUser()
-        {
-            return await _ctx.Users.CountAsync();
-        }
     }
 }
