@@ -39,9 +39,12 @@ namespace DatingApp.API
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             // add cors enable
-            services.AddCors();
+            services.AddCors();          
 
             services.AddScoped<IAuthRepository, AuthRepository>();
+
+            // add seed data
+            services.AddTransient<Seed>();
 
             // add authentication midleware, and spicify the authentication scheme and parameters
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -58,7 +61,7 @@ namespace DatingApp.API
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, Seed seeder, IAuthRepository auth)
         {
             if (env.IsDevelopment())
             {
@@ -84,6 +87,12 @@ namespace DatingApp.API
             }
 
             // app.UseHttpsRedirection();
+
+            // seed user, uncomment for the first run
+            if(auth.CountUser().Result == 0) {
+                seeder.SeedUsers();
+            }
+            
 
             // add cors
             app.UseCors(x => x.AllowAnyOrigin()

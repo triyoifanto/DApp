@@ -4,6 +4,7 @@ using DatingApp.API.Models;
 using DatingApp.API.Data;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 
 namespace DatingApp.API.Data
 {
@@ -73,6 +74,16 @@ namespace DatingApp.API.Data
                 return true;
 
             return false;
+        }
+
+        public async Task<List<User>> GetUser()
+        {
+            return await _ctx.Users.ToListAsync();
+        }
+
+        public async Task<int> CountUser()
+        {
+            return await _ctx.Users.CountAsync();
         }
     }
 }
