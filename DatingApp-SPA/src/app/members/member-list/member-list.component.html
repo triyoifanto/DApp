@@ -1,0 +1,7 @@
+<div class="container">
+  <div class="row">
+    <div *ngFor="let user of users" class="col-lg-2 col-mtd-3 col-sm-6"><!-- 12/2=4 large column, 12/3=6 medium column, 12/6=2 small column -->
+      <app-member-card [user]="user"></app-member-card>
+    </div>
+  </div>
+</div>

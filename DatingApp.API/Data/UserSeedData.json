@@ -14,7 +14,7 @@
       "Country": "Mauritania",
       "Photos": [
         {
-          "url": "https://randomuser.me/api.portraits/women/73.jpg",
+          "url": "https://randomuser.me/api/portraits/women/73.jpg",
           "description": "Lorem ad deserunt veniam reprehenderit ipsum est sint proident.",
           "dateadded": "2017-05-06",
           "isMain": true
@@ -36,7 +36,7 @@
       "Country": "Norfolk Island",
       "Photos": [
         {
-          "url": "https://randomuser.me/api.portraits/women/69.jpg",
+          "url": "https://randomuser.me/api/portraits/women/69.jpg",
           "description": "Sunt magna sint esse non in non dolore culpa magna incididunt.",
           "dateadded": "2017-06-23",
           "isMain": true
@@ -58,7 +58,7 @@
       "Country": "Ghana",
       "Photos": [
         {
-          "url": "https://randomuser.me/api.portraits/women/47.jpg",
+          "url": "https://randomuser.me/api/portraits/women/47.jpg",
           "description": "Commodo consectetur commodo incididunt amet incididunt mollit reprehenderit tempor.",
           "dateadded": "2017-06-11",
           "isMain": true
@@ -80,7 +80,7 @@
       "Country": "New Zealand",
       "Photos": [
         {
-          "url": "https://randomuser.me/api.portraits/women/76.jpg",
+          "url": "https://randomuser.me/api/portraits/women/76.jpg",
           "description": "Voluptate mollit enim consequat non ex sint ex eiusmod aliqua.",
           "dateadded": "2017-04-13",
           "isMain": true
@@ -102,7 +102,7 @@
       "Country": "Cook Islands",
       "Photos": [
         {
-          "url": "https://randomuser.me/api.portraits/women/57.jpg",
+          "url": "https://randomuser.me/api/portraits/women/57.jpg",
           "description": "Deserunt magna adipisicing culpa in in.",
           "dateadded": "2017-06-02",
           "isMain": true
@@ -124,7 +124,7 @@
         "Country": "Cyprus",
         "Photos": [
           {
-            "url": "https://randomuser.me/api.portraits/men/34.jpg",
+            "url": "https://randomuser.me/api/portraits/men/34.jpg",
             "description": "Incididunt commodo cillum consequat qui mollit deserunt.",
             "dateadded": "2017-01-23",
             "isMain": true
@@ -146,7 +146,7 @@
         "Country": "Falkland Islands (Malvinas)",
         "Photos": [
           {
-            "url": "https://randomuser.me/api.portraits/men/41.jpg",
+            "url": "https://randomuser.me/api/portraits/men/41.jpg",
             "description": "Non do eu tempor culpa eu consectetur magna ex commodo cillum.",
             "dateadded": "2017-03-29",
             "isMain": true
@@ -168,7 +168,7 @@
         "Country": "Iran",
         "Photos": [
           {
-            "url": "https://randomuser.me/api.portraits/men/97.jpg",
+            "url": "https://randomuser.me/api/portraits/men/97.jpg",
             "description": "Id aliquip ex aliqua id eiusmod quis velit.",
             "dateadded": "2017-02-13",
             "isMain": true
@@ -190,7 +190,7 @@
         "Country": "Brazil",
         "Photos": [
           {
-            "url": "https://randomuser.me/api.portraits/men/80.jpg",
+            "url": "https://randomuser.me/api/portraits/men/80.jpg",
             "description": "Quis duis quis consectetur adipisicing.",
             "dateadded": "2017-02-11",
             "isMain": true
@@ -212,7 +212,7 @@
         "Country": "Reunion",
         "Photos": [
           {
-            "url": "https://randomuser.me/api.portraits/men/16.jpg",
+            "url": "https://randomuser.me/api/portraits/men/16.jpg",
             "description": "Ea consectetur pariatur labore sunt laborum.",
             "dateadded": "2017-01-23",
             "isMain": true
