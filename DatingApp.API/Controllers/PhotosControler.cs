@@ -39,8 +39,16 @@ namespace DatingApp.API.Controllers
             _cloudinary = new Cloudinary(acc);
         }
 
+        [HttpGet("{id}", Name = "GetPhoto")]
+        public async Task<IActionResult> GetPhoto(int id){
+            var photoFromRepo = await _repo.GetPhoto(id);
+            var photo =  _mapper.Map<PhotoRetunDto>(photoFromRepo);
+
+            return Ok(photo);
+        }
+
         [HttpPost]
-        public async Task<IActionResult> AddUserPhoto(int userId, ImagePhotoDto photoDto)
+        public async Task<IActionResult> AddUserPhoto(int userId, [FromForm]ImagePhotoDto photoDto)
         {
             // check if the Id is same with the current user loggedin (id from token0)
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
@@ -71,8 +79,10 @@ namespace DatingApp.API.Controllers
                 photo.IsMain = true;
 
             userDataRepo.Photos.Add(photo);
+            
             if(await _repo.SaveAll()){
-                return Ok();
+                var photoRetunDto = _mapper.Map<PhotoRetunDto>(photo);
+                return CreatedAtRoute("GetPhoto", new { id = photo.Id }, photoRetunDto);
             }
 
             return BadRequest("Couldn't add photo");
