@@ -17,6 +17,8 @@ export class MemberEditComponent implements OnInit {
 
   user: User;
 
+  photoUrl: string;
+
   // functionality tho check the browser state, if browser closed and there is some changes than will shown ntification
   @HostListener('window:beforeunload', ['$event'])
   unloadNotification($event: any) {
@@ -32,6 +34,7 @@ export class MemberEditComponent implements OnInit {
     this.route.data.subscribe(data => {
       this.user = data['user'];
     });
+    this.authService.currentPhotoUrl.subscribe(photoUrl => this.photoUrl = photoUrl);
   }
 
   updateUser() {

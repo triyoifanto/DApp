@@ -3,6 +3,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using DatingApp.API.Data;
 using DatingApp.API.Dto;
 using DatingApp.API.Models;
@@ -20,9 +21,11 @@ namespace DatingApp.API.Controllers
         private readonly IAuthRepository _repo;
         // interface that allow us to access data in appsetting.json
         private readonly IConfiguration _config;
+        private readonly IMapper _mapper;
 
-        public AuthController(IAuthRepository repo, IConfiguration config)
+        public AuthController(IAuthRepository repo, IConfiguration config, IMapper mapper)
         {
+            this._mapper = mapper;
             this._config = config;
             this._repo = repo;
         }
@@ -57,9 +60,9 @@ namespace DatingApp.API.Controllers
         }
 
         [HttpPost("logintoken")]
-        public async Task<IActionResult> LoginToken(UserLoginDto user)
+        public async Task<IActionResult> LoginToken(UserLoginDto userLogin)
         {
-            var userData = await _repo.Login(user.UserName, user.Password);
+            var userData = await _repo.Login(userLogin.UserName, userLogin.Password);
             if (userData == null)
                 return Unauthorized();
 
@@ -87,10 +90,13 @@ namespace DatingApp.API.Controllers
             // using token handler we create roken and pass the descriptor, this token that returned to the client
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
+            var user = _mapper.Map<UserListDto>(userData);
+
             // before returned to client serialized token
             return Ok(new
             {
-                token = tokenHandler.WriteToken(token)
+                token = tokenHandler.WriteToken(token),
+                user
             });
 
             // to encode or decode token you can visit https://jwt.io
