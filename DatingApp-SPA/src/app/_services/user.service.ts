@@ -15,7 +15,7 @@ export class UserService {
 constructor(private Http: HttpClient) { }
 
 getUsers(page?, itemsPerPage?): Observable<PaginatedResult<User[]>> {
-  const paginationResult: PaginatedResult<User[]> = new PaginatedResult<User[]>();
+  const paginatedResult: PaginatedResult<User[]> = new PaginatedResult<User[]>();
   let params = new HttpParams();
 
   if (page != null && itemsPerPage != null) {
@@ -26,11 +26,11 @@ getUsers(page?, itemsPerPage?): Observable<PaginatedResult<User[]>> {
   return this.Http.get<User[]>(this.baseUrl + 'users', { observe: 'response', params })
     .pipe(
       map(response => {
-        paginationResult.result = response.body;
-        if (!response.headers.get('Pagination') != null) {
-          paginationResult.pagination = JSON.parse(response.headers.get('Pagination'));
+        paginatedResult.result = response.body;
+        if (response.headers.get('Pagination') != null) {
+          paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
         }
-        return paginationResult;
+        return paginatedResult;
       })
     );
 }
