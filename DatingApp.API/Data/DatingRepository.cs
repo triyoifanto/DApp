@@ -41,7 +41,7 @@ namespace DatingApp.API.Data
 
         public async Task<PagedList<User>> GetUsers(UserParams userParams)
         {
-            var users = _ctx.Users.Include(p => p.Photos);
+            var users = _ctx.Users.Include(p => p.Photos).Where(u => u.Id != userParams.UserId && u.Gender == userParams.Gender);
             var result = await PagedList<User>.CreateAsync(users, userParams.PageNumber, userParams.PageSize);
             return result;
         }
