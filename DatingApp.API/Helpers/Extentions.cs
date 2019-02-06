@@ -1,5 +1,7 @@
 using System;
 using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace DatingApp.API.Helpers
 {
@@ -19,6 +21,20 @@ namespace DatingApp.API.Helpers
                 age--;
 
             return age;
+        }
+
+        public static void AddPagination(this HttpResponse response,
+        int currentPage, int itemsPerPage, int totalItems, int totalPages)
+        {
+            // add custom header for pagination on the response header
+            var paginationHeader = new PaginationHeader(currentPage, itemsPerPage, totalItems, totalPages);
+            // formating the response data
+            var camelCaseFormatter = new JsonSerializerSettings();
+            camelCaseFormatter.ContractResolver = new CamelCasePropertyNamesContractResolver();
+
+            // define the custom header
+            response.Headers.Add("Pagination", JsonConvert.SerializeObject(paginationHeader, camelCaseFormatter));
+            response.Headers.Add("Access-Controll-Expose-Headers", "Pagination");
         }
     }
 }
