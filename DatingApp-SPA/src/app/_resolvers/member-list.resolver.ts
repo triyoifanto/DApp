@@ -8,12 +8,14 @@ import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export class MemberListResolver implements Resolve<User[]> {
+    pageNumber = 1;
+    pageSize = 5;
     constructor(private userService: UserService, private router: Router,
         private alertify: AlertifyService) {}
 
         // if use resolve we don't need to use subscrib. it will be automatic subscrib
     resolve(route: ActivatedRouteSnapshot): Observable<User[]> {
-        return this.userService.getUsers().pipe(
+        return this.userService.getUsers(this.pageNumber, this.pageSize).pipe(
             catchError(error => {
                 this.alertify.error('problem retrieving data');
                 this.router.navigate(['/home']);
