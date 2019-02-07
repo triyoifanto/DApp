@@ -42,18 +42,28 @@ namespace DatingApp.API.Data
 
         public async Task<PagedList<User>> GetUsers(UserParams userParams)
         {
-            var users = _ctx.Users.Include(p => p.Photos).AsQueryable();
-
-            users.Where(u => u.Id != userParams.UserId && u.Gender == userParams.Gender);
-
             if(userParams.MinAge != 18 || userParams.MaxAge != 99) {
                 var minDateofBirth =  DateTime.Today.AddYears(-userParams.MaxAge - 1);
                 var maxDateofBirth =  DateTime.Today.AddYears(-userParams.MinAge);
 
-                users = users.Where(u => u.DateOfBirth >= minDateofBirth && u.DateOfBirth <= maxDateofBirth)                ;
+                var users = _ctx.Users
+                            .Include(p => p.Photos)
+                            .Where(u => u.Id != userParams.UserId && 
+                                u.Gender == userParams.Gender && 
+                                u.DateOfBirth >= minDateofBirth && 
+                                u.DateOfBirth <= maxDateofBirth)
+                            .AsQueryable();
+                
+                return await PagedList<User>.CreateAsync(users, userParams.PageNumber, userParams.PageSize);
             }
-            var result = await PagedList<User>.CreateAsync(users, userParams.PageNumber, userParams.PageSize);
-            return result;
+            else {
+                var users = _ctx.Users
+                            .Include(p => p.Photos)
+                            .Where(u => u.Id != userParams.UserId && u.Gender == userParams.Gender)
+                            .AsQueryable();
+
+                return await PagedList<User>.CreateAsync(users, userParams.PageNumber, userParams.PageSize);
+            }
         }
 
         public async Task<bool> SaveAll()
